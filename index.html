@@ -1,0 +1,650 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kathy (Kai-Hsin) Chen — Marketing Analytics</title>
+<meta name="description" content="Kathy (Kai-Hsin) Chen — marketing analytics professional turning campaign and consumer data into decisions.">
+<style>
+  :root {
+    --ink: #0a0c10;
+    --surface: #12151c;
+    --surface-2: #171b24;
+    --line: #232733;
+    --paper: #e8e6e0;
+    --muted: #8b8f9a;
+    --signal: #e8b04b;
+    --signal-dim: #b6893c;
+    --measure: 40rem;
+    --gutter: clamp(1.25rem, 4vw, 3.5rem);
+    --font-display: ui-serif, Georgia, "Iowan Old Style", "Palatino Linotype", "Times New Roman", serif;
+    --font-body: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    --font-mono: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace;
+  }
+
+  * { box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    * { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; }
+  }
+
+  body {
+    margin: 0;
+    background: var(--ink);
+    color: var(--paper);
+    font-family: var(--font-body);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+
+  a { color: inherit; }
+
+  ::selection { background: var(--signal); color: var(--ink); }
+
+  :focus-visible {
+    outline: 2px solid var(--signal);
+    outline-offset: 3px;
+    border-radius: 2px;
+  }
+
+  /* ---------- layout shells ---------- */
+
+  .wrap {
+    max-width: 52rem;
+    margin: 0 auto;
+    padding-left: var(--gutter);
+    padding-right: var(--gutter);
+  }
+
+  section { position: relative; }
+
+  .eyebrow {
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    letter-spacing: 0.02em;
+    color: var(--signal-dim);
+    margin: 0 0 1.75rem;
+  }
+
+  .eyebrow::before { content: "// "; color: var(--line); }
+
+  /* ---------- nav ---------- */
+
+  .nav {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    background: rgba(10, 12, 16, 0.7);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-bottom: 1px solid transparent;
+    transition: border-color 0.3s ease, background 0.3s ease;
+  }
+
+  .nav.scrolled {
+    border-bottom-color: var(--line);
+    background: rgba(10, 12, 16, 0.92);
+  }
+
+  .nav-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-top: 1.1rem;
+    padding-bottom: 1.1rem;
+  }
+
+  .nav-mark {
+    font-family: var(--font-mono);
+    font-size: 0.9rem;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    color: var(--paper);
+    text-decoration: none;
+  }
+
+  .nav-mark span { color: var(--signal); }
+
+  .nav-links {
+    display: flex;
+    gap: clamp(1rem, 3vw, 2rem);
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .nav-links a {
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    text-decoration: none;
+    color: var(--muted);
+    transition: color 0.2s ease;
+  }
+
+  .nav-links a:hover { color: var(--signal); }
+
+  /* ---------- hero ---------- */
+
+  .hero {
+    padding-top: clamp(4rem, 12vh, 7rem);
+    padding-bottom: clamp(3.5rem, 10vh, 5.5rem);
+  }
+
+  .hero-kicker {
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    color: var(--muted);
+    margin: 0 0 1.4rem;
+    letter-spacing: 0.02em;
+  }
+
+  .hero-kicker .dot { color: var(--signal); }
+
+  h1.hero-name {
+    font-family: var(--font-display);
+    font-weight: 500;
+    font-size: clamp(2.4rem, 6vw, 3.8rem);
+    line-height: 1.08;
+    margin: 0 0 1.1rem;
+    letter-spacing: -0.01em;
+  }
+
+  .hero-tagline {
+    font-family: var(--font-display);
+    font-style: italic;
+    font-size: clamp(1.15rem, 2.4vw, 1.5rem);
+    color: var(--paper);
+    max-width: 34rem;
+    margin: 0 0 1.75rem;
+    line-height: 1.45;
+  }
+
+  .hero-stats {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem 0.9rem;
+    margin: 0 0 2.1rem;
+  }
+
+  .tag {
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    color: var(--signal);
+    border: 1px solid rgba(232, 176, 74, 0.35);
+    background: rgba(232, 176, 74, 0.08);
+    border-radius: 3px;
+    padding: 0.08em 0.42em;
+    white-space: nowrap;
+  }
+
+  .stat-pill {
+    display: flex;
+    align-items: baseline;
+    gap: 0.45rem;
+    font-family: var(--font-mono);
+    font-size: 0.82rem;
+    color: var(--muted);
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    padding: 0.35rem 0.85rem 0.35rem 0.6rem;
+  }
+
+  .stat-pill strong {
+    color: var(--signal);
+    font-size: 0.95rem;
+  }
+
+  .hero-cta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.9rem;
+  }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-family: var(--font-mono);
+    font-size: 0.82rem;
+    letter-spacing: 0.02em;
+    text-decoration: none;
+    padding: 0.7rem 1.15rem;
+    border-radius: 4px;
+    border: 1px solid var(--line);
+    color: var(--paper);
+    transition: border-color 0.2s ease, transform 0.2s ease, background 0.2s ease;
+  }
+
+  .btn:hover { border-color: var(--signal-dim); transform: translateY(-1px); }
+
+  .btn.primary {
+    background: var(--signal);
+    border-color: var(--signal);
+    color: #1a1305;
+    font-weight: 600;
+  }
+
+  .btn.primary:hover { background: #f0bd5e; border-color: #f0bd5e; }
+
+  /* ---------- generic sections ---------- */
+
+  .section {
+    padding-top: clamp(3rem, 8vh, 4.5rem);
+    padding-bottom: clamp(3rem, 8vh, 4.5rem);
+    border-top: 1px solid var(--line);
+  }
+
+  .reveal {
+    opacity: 0;
+    transform: translateY(14px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+
+  .reveal.is-visible { opacity: 1; transform: translateY(0); }
+
+  /* ---------- about ---------- */
+
+  .about-lede {
+    font-size: 1.05rem;
+    max-width: var(--measure);
+    color: var(--paper);
+    margin: 0 0 2rem;
+  }
+
+  .toolkit {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(13rem, 1fr));
+    gap: 1.5rem;
+    border-top: 1px solid var(--line);
+    padding-top: 1.75rem;
+  }
+
+  .toolkit-group h3 {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--muted);
+    margin: 0 0 0.7rem;
+    font-weight: 500;
+  }
+
+  .toolkit-group p {
+    margin: 0;
+    font-size: 0.92rem;
+    color: var(--paper);
+  }
+
+  /* ---------- experience ---------- */
+
+  .role {
+    display: grid;
+    grid-template-columns: 9.5rem 1fr;
+    gap: 1.5rem 2rem;
+    padding: 1.75rem 0;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .role:last-child { border-bottom: none; padding-bottom: 0; }
+  .role:first-child { padding-top: 0; }
+
+  .role-meta {
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    color: var(--muted);
+    line-height: 1.7;
+  }
+
+  .role-meta .place { display: block; color: var(--muted); }
+
+  .role-heading {
+    font-family: var(--font-display);
+    font-size: 1.25rem;
+    margin: 0 0 0.15rem;
+    color: var(--paper);
+  }
+
+  .role-title {
+    display: block;
+    font-family: var(--font-body);
+    font-size: 0.88rem;
+    color: var(--signal-dim);
+    margin: 0 0 0.9rem;
+  }
+
+  .role ul {
+    margin: 0;
+    padding-left: 1.1rem;
+    font-size: 0.95rem;
+    color: var(--paper);
+  }
+
+  .role li { margin-bottom: 0.55rem; }
+  .role li:last-child { margin-bottom: 0; }
+
+  /* ---------- projects ---------- */
+
+  .project-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr));
+    gap: 1.25rem;
+  }
+
+  .project-card {
+    border: 1px solid var(--line);
+    background: var(--surface);
+    border-radius: 6px;
+    padding: 1.6rem 1.6rem 1.75rem;
+    transition: border-color 0.2s ease, transform 0.2s ease;
+  }
+
+  .project-card:hover { border-color: var(--signal-dim); transform: translateY(-2px); }
+
+  .project-meta {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: var(--muted);
+    margin-bottom: 0.6rem;
+  }
+
+  .project-card h3 {
+    font-family: var(--font-display);
+    font-size: 1.2rem;
+    margin: 0 0 0.2rem;
+  }
+
+  .project-role {
+    display: block;
+    font-size: 0.85rem;
+    color: var(--signal-dim);
+    margin-bottom: 0.9rem;
+  }
+
+  .project-card ul {
+    margin: 0;
+    padding-left: 1.05rem;
+    font-size: 0.92rem;
+  }
+
+  .project-card li { margin-bottom: 0.55rem; }
+  .project-card li:last-child { margin-bottom: 0; }
+
+  /* ---------- contact ---------- */
+
+  .contact-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: 2rem;
+  }
+
+  .contact-main a.email {
+    font-family: var(--font-display);
+    font-size: clamp(1.5rem, 4vw, 2.1rem);
+    text-decoration: none;
+    color: var(--paper);
+    border-bottom: 1px solid var(--signal-dim);
+    transition: color 0.2s ease, border-color 0.2s ease;
+  }
+
+  .contact-main a.email:hover { color: var(--signal); border-color: var(--signal); }
+
+  .contact-list {
+    list-style: none;
+    margin: 1.5rem 0 0;
+    padding: 0;
+    font-family: var(--font-mono);
+    font-size: 0.88rem;
+    color: var(--muted);
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .contact-list a { text-decoration: none; color: var(--muted); transition: color 0.2s ease; }
+  .contact-list a:hover { color: var(--signal); }
+
+  footer {
+    border-top: 1px solid var(--line);
+    padding: 1.75rem var(--gutter) 2.5rem;
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    color: var(--muted);
+    text-align: center;
+  }
+
+  /* ---------- responsive ---------- */
+
+  @media (max-width: 640px) {
+    .nav-links { gap: 1rem; }
+    .role { grid-template-columns: 1fr; gap: 0.4rem; }
+    .role-meta { order: -1; }
+    .contact-grid { align-items: flex-start; flex-direction: column; }
+  }
+
+  @media (max-width: 460px) {
+    .nav-links a:nth-child(4) { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<nav class="nav" id="nav">
+  <div class="wrap nav-row">
+    <a href="#" class="nav-mark">KC<span>.</span></a>
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#experience">Experience</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </div>
+</nav>
+
+<header class="hero wrap">
+  <p class="hero-kicker">London, UK <span class="dot">·</span> Marketing Analytics</p>
+  <h1 class="hero-name">Kathy (Kai-Hsin) Chen</h1>
+  <p class="hero-tagline">Marketing analytics that ships decisions, not just dashboards.</p>
+
+  <div class="hero-stats">
+    <span class="stat-pill">organic traffic <strong>+85%</strong></span>
+    <span class="stat-pill">lead generation <strong>+45%</strong></span>
+    <span class="stat-pill">client retention <strong>+40%</strong></span>
+  </div>
+
+  <div class="hero-cta">
+    <a class="btn primary" href="mailto:kaihsinchen.biz@gmail.com">Email me</a>
+    <a class="btn" href="https://www.linkedin.com/in/kai-hsin-chen/" target="_blank" rel="noopener">LinkedIn ↗</a>
+    <a class="btn" href="tel:+447570907596">+44 7570 907 596</a>
+  </div>
+</header>
+
+<main>
+
+  <section class="section reveal" id="about">
+    <div class="wrap">
+      <p class="eyebrow">about</p>
+      <p class="about-lede">
+        I turn messy campaign and consumer data into decisions leadership can act on. Across cloud tech, hospitality,
+        and consultancy work, I've built go-to-market plans, run statistical analyses in JASP
+        (<span class="tag">ANOVA</span>, <span class="tag">regression</span>, <span class="tag">chi-square</span>),
+        and translated dashboards into board-ready reports &mdash; work behind results like
+        <span class="tag">85%</span> organic traffic growth and <span class="tag">45%</span> higher lead generation.
+        Currently completing an MSc in International Marketing at King's College London, building on a BSc in
+        Business Management from National Taiwan Normal University.
+      </p>
+
+      <div class="toolkit">
+        <div class="toolkit-group">
+          <h3>IT Skills</h3>
+          <p>Google Analytics, Salesforce, JASP, MS Office</p>
+        </div>
+        <div class="toolkit-group">
+          <h3>Key Skills</h3>
+          <p>Marketing Analytics, Campaign Execution, GTM Strategy, Content Marketing, Project Management</p>
+        </div>
+        <div class="toolkit-group">
+          <h3>Languages</h3>
+          <p>English (Fluent), Mandarin (Native)</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section reveal" id="experience">
+    <div class="wrap">
+      <p class="eyebrow">experience</p>
+
+      <article class="role">
+        <div class="role-meta">Dec 2024 &ndash; Aug 2025<span class="place">Taipei, Taiwan</span></div>
+        <div>
+          <h3 class="role-heading">CloudMile</h3>
+          <span class="role-title">Marketing Intern</span>
+          <ul>
+            <li>Managed end-to-end execution of <span class="tag">10+</span> marketing campaigns across
+              <span class="tag">5</span> internal teams and <span class="tag">10+</span> external partners,
+              driving <span class="tag">50+</span> demo sign-ups per event.</li>
+            <li>Leveraged Google Analytics to optimise SEO across <span class="tag">10+</span> target B2B keywords,
+              achieving <span class="tag">85%</span> growth in organic traffic.</li>
+            <li>Analysed digital and offline campaign data to deliver <span class="tag">20+</span> performance
+              reports, increasing lead generation by <span class="tag">45%</span>.</li>
+          </ul>
+        </div>
+      </article>
+
+      <article class="role">
+        <div class="role-meta">Jul 2023 &ndash; Aug 2023<span class="place">Taipei, Taiwan</span></div>
+        <div>
+          <h3 class="role-heading">Grand Hyatt</h3>
+          <span class="role-title">Sales and Marketing Summer Intern</span>
+          <ul>
+            <li>Analysed <span class="tag">2,000+</span> sales data points to generate <span class="tag">80+</span>
+              performance reports guiding senior management's marketing strategy.</li>
+            <li>Managed CRM for <span class="tag">15+</span> B2B clients, lifting customer retention by
+              <span class="tag">40%</span>.</li>
+          </ul>
+        </div>
+      </article>
+
+      <article class="role">
+        <div class="role-meta">Jan 2024 &ndash; Jun 2024<span class="place">Taipei, Taiwan</span></div>
+        <div>
+          <h3 class="role-heading">Google Developer Student Clubs, NTNU</h3>
+          <span class="role-title">Head of Finance</span>
+          <ul>
+            <li>Optimised operations and budgets through financial data analysis, achieving a
+              <span class="tag">23%</span> cost reduction.</li>
+            <li>Turned campaign performance data into an engagement strategy, achieving a
+              <span class="tag">2&times;</span> boost in conversion and a <span class="tag">45%</span> rise in
+              engagement.</li>
+          </ul>
+        </div>
+      </article>
+
+      <article class="role">
+        <div class="role-meta">Jan 2023 &ndash; Jun 2023<span class="place">Taipei, Taiwan</span></div>
+        <div>
+          <h3 class="role-heading">TEDx NTNU</h3>
+          <span class="role-title">Marketing Associate</span>
+          <ul>
+            <li>Refined content strategy from social performance metrics, lifting click-through rate by
+              <span class="tag">195%</span> and offline turnout by <span class="tag">25%</span>.</li>
+            <li>Directed data-driven social research, growing Instagram following <span class="tag">43%</span>
+              in six months.</li>
+          </ul>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <section class="section reveal" id="projects">
+    <div class="wrap">
+      <p class="eyebrow">projects</p>
+      <div class="project-grid">
+
+        <div class="project-card">
+          <p class="project-meta">London, UK &middot; Jan &ndash; Apr 2026</p>
+          <h3>Dr. Shiba</h3>
+          <span class="project-role">Marketing Consultant &middot; Consultancy Project</span>
+          <ul>
+            <li>Architected a <span class="tag">&pound;50k</span> budget allocation across influencer, partnership,
+              and digital channels for a premium pet brand, delivering a phased market-entry roadmap targeting
+              profitability within six months.</li>
+            <li>Mapped a <span class="tag">6-touchpoint</span> omnichannel customer journey across
+              <span class="tag">6</span> offline partnerships and <span class="tag">10+</span> influencer
+              profiles in the <span class="tag">&pound;6.7B</span> UK pet care market.</li>
+          </ul>
+        </div>
+
+        <div class="project-card">
+          <p class="project-meta">London, UK &middot; Sep &ndash; Dec 2025</p>
+          <h3>SINE Digital</h3>
+          <span class="project-role">Marketing Consultant &middot; Consultancy Project</span>
+          <ul>
+            <li>Designed and ran qualitative interviews and a quantitative survey (<span class="tag">n=213</span>),
+              applying ANOVA, regression, and chi-square analysis in JASP for a live client pitch at Sine Digital's
+              London HQ.</li>
+            <li>Built data-driven personas from <span class="tag">200+</span> consumer data points into an
+              actionable marketing plan shaping go-to-market positioning.</li>
+          </ul>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <section class="section reveal" id="contact">
+    <div class="wrap">
+      <p class="eyebrow">contact</p>
+      <div class="contact-grid">
+        <div class="contact-main">
+          <a class="email" href="mailto:kaihsinchen.biz@gmail.com">kaihsinchen.biz@gmail.com</a>
+          <ul class="contact-list">
+            <li><a href="tel:+447570907596">+44 7570 907 596</a></li>
+            <li><a href="https://www.linkedin.com/in/kai-hsin-chen/" target="_blank" rel="noopener">linkedin.com/in/kai-hsin-chen</a></li>
+            <li>London, UK</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  Kathy (Kai-Hsin) Chen &mdash; built with plain HTML, CSS &amp; JS.
+</footer>
+
+<script>
+(function () {
+  var nav = document.getElementById('nav');
+  window.addEventListener('scroll', function () {
+    nav.classList.toggle('scrolled', window.scrollY > 8);
+  }, { passive: true });
+
+  var reveals = document.querySelectorAll('.reveal');
+  if ('IntersectionObserver' in window) {
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-visible');
+          io.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12 });
+    reveals.forEach(function (el) { io.observe(el); });
+  } else {
+    reveals.forEach(function (el) { el.classList.add('is-visible'); });
+  }
+})();
+</script>
+
+</body>
+</html>
